@@ -10,7 +10,7 @@ namespace TrainYourProgrammer {
       while((userInput = ShowUserInputPrompt(c_prompt_label)).ToLower() != c_commando_exit) {
         switch(userInput) {
           case "calc":
-            ReadTwoNumbersAndMultiply();
+            Console.WriteLine("Result: "+ReadTwoNumbersAndMultiply());
             break;
 
           default:
@@ -25,9 +25,10 @@ namespace TrainYourProgrammer {
       return Console.ReadLine();
     }
 
-    static void ReadTwoNumbersAndMultiply() {
+    static int ReadTwoNumbersAndMultiply() {
       string userInput;
       int parsedInteger1, parsedInteger2;
+      int result;
 
       while(!int.TryParse((userInput=ShowUserInputPrompt("First number: ")), out parsedInteger1)) {
         Console.WriteLine("Only integer numbers!");
@@ -35,7 +36,13 @@ namespace TrainYourProgrammer {
       while(!int.TryParse((userInput = ShowUserInputPrompt("Second number: ")), out parsedInteger2)) {
         Console.WriteLine("Only integer numbers!");
       }
-      Console.WriteLine("To be done!");
+
+      result = 0;
+      for(int i = 1; i <= parsedInteger1; i++) {
+        result += parsedInteger2;
+      }
+
+      return result;
     }
   }
 }
