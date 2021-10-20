@@ -31,11 +31,21 @@ namespace TrainYourProgrammer {
     static void CreateTreeInConsole(int wantedHeight) {
       int currentConsoleHeight = Console.WindowHeight, currentConsoleWidth = Console.WindowWidth;
       int neededRows = (wantedHeight * 3) + 1, realRowCount = neededRows;
+      int realColumnCount, middleColumn;
 
-      while(realRowCount > (currentConsoleHeight - Console.CursorTop) {
+      while(realRowCount > (currentConsoleHeight - Console.CursorTop)) {
         realRowCount -= 3;
       }
+
+      realColumnCount = (realRowCount - 1) / 3;
+      middleColumn = ((realColumnCount - 1) / 2) + 1;
+
       Console.WriteLine($"Fenstergröße: {currentConsoleWidth}x{currentConsoleHeight}, CursorTop: {Console.CursorTop}, Höhe: {wantedHeight}, Benötigte Zeilen: {neededRows}/{realRowCount}");
+
+      
+
+      Console.ReadKey();
+      Console.Clear();
     }
   }
 }
