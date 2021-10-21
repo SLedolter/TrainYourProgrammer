@@ -45,9 +45,11 @@ namespace TrainYourProgrammer {
     }
 
     static void DrawSingleTreeBlock(int blockNumber, int columnMidPoint) {
+      int oldConsoleTop = Console.CursorTop, oldConsoleLeft = Console.CursorLeft;
       for(int i = blockNumber-1; i < blockNumber; i++) {
         for(int row = 0; row < blockHeight; row++) {
           string star = new string('*', (blockNumber-1)*2+(1+2*row));
+          Console.SetCursorPosition(columnMidPoint - star.Length/2, Console.CursorTop);
           Console.WriteLine(star);
         }
       }
