@@ -14,9 +14,19 @@ namespace TrainYourProgrammer {
             Console.WriteLine("Babybäume dürfen erst ab einer Höhe von 3 verarbeitet werden!");
           } else {
             CreateTreeInConsole(treeHeight);
+            Console.ReadKey();
+            Console.Clear();
           }
         }
       }
+    }
+
+    static void CreateTreeInConsole(int wantedHeight) {
+      
+    }
+
+    static void DrawSingleTreeBlock(int blockNumber, int columnMidPoint) {
+
     }
 
     static string GetUserInputWithPrompt(string prompt) {
@@ -26,26 +36,6 @@ namespace TrainYourProgrammer {
       result = Console.ReadLine();
 
       return result;
-    }
-
-    static void CreateTreeInConsole(int wantedHeight) {
-      int currentConsoleHeight = Console.WindowHeight, currentConsoleWidth = Console.WindowWidth;
-      int neededRows = (wantedHeight * 3) + 1, realRowCount = neededRows;
-      int realColumnCount, middleColumn;
-
-      while(realRowCount > (currentConsoleHeight - Console.CursorTop)) {
-        realRowCount -= 3;
-      }
-
-      realColumnCount = (realRowCount - 1) / 3;
-      middleColumn = ((realColumnCount - 1) / 2) + 1;
-
-      Console.WriteLine($"Fenstergröße: {currentConsoleWidth}x{currentConsoleHeight}, CursorTop: {Console.CursorTop}, Höhe: {wantedHeight}, Benötigte Zeilen: {neededRows}/{realRowCount}");
-
-      
-
-      Console.ReadKey();
-      Console.Clear();
     }
   }
 }
