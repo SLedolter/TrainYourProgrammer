@@ -2,6 +2,8 @@
 
 namespace TrainYourProgrammer {
   class Program {
+    int blockHeight = 3;
+
     static void Main(string[] args) {
       string userInput;
       int treeHeight;
@@ -22,7 +24,19 @@ namespace TrainYourProgrammer {
     }
 
     static void CreateTreeInConsole(int wantedHeight) {
-      
+      int possibleHeight = CalculateHeightDependingOnWindowSize(wantedHeight);
+      int possibleTreeBlocks = (possibleHeight - 1) / 3;
+
+    }
+
+    static int CalculateHeightDependingOnWindowSize(int blockCount) {
+      int calculatedRows = blockCount * 3 + 1;
+
+      if(calculatedRows > Console.WindowHeight) {
+        calculatedRows -= 3;
+      }
+
+      return calculatedRows;
     }
 
     static void DrawSingleTreeBlock(int blockNumber, int columnMidPoint) {
