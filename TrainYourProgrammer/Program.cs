@@ -4,6 +4,8 @@ namespace TrainYourProgrammer {
   class Program {
     static void Main(string[] args) {
       Niederschlag niederschlag = new Niederschlag();
+
+
     }
   }
 
@@ -14,13 +16,13 @@ namespace TrainYourProgrammer {
     }
 
     public double DurchschnittBerechnen(int vonMonat, int bisMonat) {
-      int count = bisMonat - vonMonat;
+      int count = (bisMonat + 1) - vonMonat;
       int summe = 0;
 
-      for(int i = vonMonat-1; i<= bisMonat-1; i++) {
+      for(int i = vonMonat - 1; i <= bisMonat - 1; i++) {
         summe += monatsWerte[i];
       }
-      return summe/count;
+      return summe / count;
     }
   }
 }
