@@ -1,4 +1,6 @@
 ﻿using System;
+using ConsoleLibrary;
+
 
 namespace TrainYourProgrammer {
   class Program {
