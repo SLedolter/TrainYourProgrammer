@@ -28,7 +28,7 @@ namespace TrainYourProgrammer {
 
     const string MSG_ONLY_NUMBERS = "Bitte nur Z A H L E N eingeben.";
 
-    public NumberGuessing() {}
+    public NumberGuessing() { }
 
     public void Initialize() {
       this.lowerBounds = -1;
@@ -50,16 +50,18 @@ namespace TrainYourProgrammer {
     public void GuessNumber() {
       tries++;
       int input;
-      input = Console2k.ReadInt($"Ihr {tries} Versuch ({targetNumber}): ");
-      
-      if(input == lastGuess) {
+      input = Console2k.ReadInt($"Ihr {tries.ToString("D2")} Versuch ({targetNumber}): ");
+
+      if (input == lastGuess) {
         Console.WriteLine("Zahl schon gewählt!");
         // list mit multi result?
+      } else if (input < lowerBounds || input > upperBounds) {
+        Console.WriteLine("Die Zahl muss innerhalb der Grenzen liegen!");
       } else {
         lastGuess = input;
       }
 
-      if(input == targetNumber) {
+      if (input == targetNumber) {
         numberFound = true;
         Console.WriteLine($"Glückwunsch die von Ihnen eingegebene Zahl ({input}) stimmt mit {targetNumber} überein!");
       }
