@@ -45,24 +45,52 @@ namespace TrainYourProgrammer {
 
     private void CalculateRomanNumber(int number) {
       var valueOrder = values.OrderByDescending(x => x.Value).ToList();
-      int count = 0;
-      int calcNumber = number;
-      string result = "";
-      char lastKey = ' ';
+      string result;
 
-      for(int i = 0; i < valueOrder.Count; i++) {
-        if (calcNumber >= values[valueOrder[i].Key]) {
-          string subResult = "";
-          count = calcNumber / values[valueOrder[i].Key];
-          subResult = new string(valueOrder[i].Key, count);
-          Console.WriteLine($"SR: {subResult}");
-          if (count >= 4 && valueOrder[i].Key != 'M') {
-            
-          }
-          calcNumber -= values[valueOrder[i].Key] * count;
-          lastKey = valueOrder[i].Key;
-          result += subResult;
+      int ones, tens, hundreds, thousands;
+      ones = number % 10;
+      tens = (number % 100 - ones)/10;
+      hundreds = (number % 1000)/100;
+      thousands = (number % 10000)/1000;
+
+      Console.WriteLine($"{thousands}-{hundreds}-{tens}-{ones}");
+
+      result = new string('M', thousands);
+
+      if (hundreds == 9) {
+        result += "CM";
+      } else if (hundreds == 4) {
+        result += "CD";
+      } else {
+        if (hundreds > 5) {
+          result += "D";
+          hundreds -= 5;
         }
+        result += new string('C', hundreds);
+      }
+
+      if (tens == 9) {
+        result += "XC";
+      } else if (tens == 4) {
+        result += "XL";
+      } else {
+        if (tens > 5) {
+          result += "L";
+          tens -= 5;
+        }
+        result += new string('X', tens);
+      }
+
+      if (ones == 9) {
+        result += "IX";
+      } else if (ones == 4) {
+        result += "IV";
+      } else {
+        if (ones > 5) {
+          result += "V";
+          ones -= 5;
+        }
+        result += new string('I', ones);
       }
 
       Console.WriteLine(result);
