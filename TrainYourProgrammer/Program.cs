@@ -50,22 +50,26 @@ namespace TrainYourProgrammer {
       string result = "";
       char lastKey = ' ';
 
-      foreach(var entry in valueOrder) {
-        if (calcNumber > values[entry.Key]) {
+      for(int i = 0; i < valueOrder.Count; i++) {
+        if (calcNumber >= values[valueOrder[i].Key]) {
           string subResult = "";
-          count = calcNumber / values[entry.Key];
-          if(count == 4 && entry.Key != 'M') {
-             subResult = entry.Key.ToString() + lastKey;
-          } else {
-            subResult = new string(entry.Key, count);
+          count = calcNumber / values[valueOrder[i].Key];
+          subResult = new string(valueOrder[i].Key, count);
+          Console.WriteLine($"SR: {subResult}");
+          if (count >= 4 && valueOrder[i].Key != 'M') {
+            
           }
-          calcNumber -= values[entry.Key] * count;
-          lastKey = entry.Key;
+          calcNumber -= values[valueOrder[i].Key] * count;
+          lastKey = valueOrder[i].Key;
           result += subResult;
         }
       }
 
       Console.WriteLine(result);
+    }
+
+    private string UseSubtractionRule(string subResult) {
+      return subResult + "-";
     }
   }
 }
