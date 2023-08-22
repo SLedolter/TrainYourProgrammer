@@ -17,6 +17,7 @@ namespace TrainYourProgrammer {
 
   public class RomanDigits {
     Dictionary<char, int> values;
+    Dictionary<string, string> subtractedValues;
 
     public RomanDigits() {
       values = new Dictionary<char, int>() {
@@ -28,6 +29,16 @@ namespace TrainYourProgrammer {
         { 'D', 500 },
         { 'M', 1000 }
       };
+
+      subtractedValues = new Dictionary<string, string>() {
+        { "CM", "DCCCC" },
+        { "CD", "CCCC" },
+        { "XC", "LXXXX" },
+        { "XL", "XXXX" },
+        { "IX", "VIIII" },
+        { "IV", "IIII" }
+      };
+
     }
 
     public void CalculateNumber(string number) {
@@ -42,11 +53,23 @@ namespace TrainYourProgrammer {
     public void CalculateDecimalNumber(string number) {
       int result = 0;
 
+      number = RemoveSubstractionRule(number);
+
       for(int i = 0; i < number.Length; i++) {
         result += values[number[i]];
       }
 
       Console.WriteLine(result);
+    }
+
+    private string RemoveSubstractionRule(string number) {
+      string result = number;
+
+      foreach(var entry in subtractedValues) {
+        result = result.Replace(entry.Key, entry.Value);
+      }
+
+      return result;
     }
 
     private void CalculateRomanNumber(int number) {
@@ -63,14 +86,14 @@ namespace TrainYourProgrammer {
 
       result = new string('M', thousands);
 
-      result += UseSubtractionRule(hundreds, "MDC");
-      result += UseSubtractionRule(tens, "CLX");
-      result += UseSubtractionRule(ones, "XVI");
+      result += UseSubtractionRuleToRoman(hundreds, "MDC");
+      result += UseSubtractionRuleToRoman(tens, "CLX");
+      result += UseSubtractionRuleToRoman(ones, "XVI");
 
       Console.WriteLine(result);
     }
 
-    private string UseSubtractionRule(int value, string romanDigits) {
+    private string UseSubtractionRuleToRoman(int value, string romanDigits) {
       if (romanDigits.Length != 3)
         throw new ArgumentException("Roman numbers exception");
 
