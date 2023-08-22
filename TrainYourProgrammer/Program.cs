@@ -39,8 +39,14 @@ namespace TrainYourProgrammer {
       }
     }
 
-    private void CalculateDecimalNumber(string number) {
-      throw new NotImplementedException();
+    public void CalculateDecimalNumber(string number) {
+      int result = 0;
+
+      for(int i = 0; i < number.Length; i++) {
+        result += values[number[i]];
+      }
+
+      Console.WriteLine(result);
     }
 
     private void CalculateRomanNumber(int number) {
@@ -57,47 +63,30 @@ namespace TrainYourProgrammer {
 
       result = new string('M', thousands);
 
-      if (hundreds == 9) {
-        result += "CM";
-      } else if (hundreds == 4) {
-        result += "CD";
-      } else {
-        if (hundreds > 5) {
-          result += "D";
-          hundreds -= 5;
-        }
-        result += new string('C', hundreds);
-      }
-
-      if (tens == 9) {
-        result += "XC";
-      } else if (tens == 4) {
-        result += "XL";
-      } else {
-        if (tens > 5) {
-          result += "L";
-          tens -= 5;
-        }
-        result += new string('X', tens);
-      }
-
-      if (ones == 9) {
-        result += "IX";
-      } else if (ones == 4) {
-        result += "IV";
-      } else {
-        if (ones > 5) {
-          result += "V";
-          ones -= 5;
-        }
-        result += new string('I', ones);
-      }
+      result += UseSubtractionRule(hundreds, "MDC");
+      result += UseSubtractionRule(tens, "CLX");
+      result += UseSubtractionRule(ones, "XVI");
 
       Console.WriteLine(result);
     }
 
-    private string UseSubtractionRule(string subResult) {
-      return subResult + "-";
+    private string UseSubtractionRule(int value, string romanDigits) {
+      if (romanDigits.Length != 3)
+        throw new ArgumentException("Roman numbers exception");
+
+      string result = ""; 
+      if (value == 9) {
+        result = romanDigits[2].ToString()+romanDigits[0].ToString();
+      } else if (value == 4) {
+        result = romanDigits[2].ToString() + romanDigits[1].ToString();
+      } else {
+        if (value >= 5) {
+          result = romanDigits[1].ToString();
+          value -= 5;
+        }
+        result += new string(romanDigits[2], value);
+      }
+      return result;
     }
   }
 }
