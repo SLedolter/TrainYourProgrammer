@@ -8,6 +8,7 @@ namespace TrainYourProgrammer {
       Calculator calc = new Calculator();
 
       calc.GetInput();
+      calc.Calculate();
     }
   }
 
@@ -29,6 +30,7 @@ namespace TrainYourProgrammer {
       Console.Write(label);
       while(!IsOperator(result = Console.ReadLine())) {
         Console.WriteLine("Muss regulärer Operator sein (+,-,*,/)");
+        Console.Write(label);
       }
 
       return result[0];
@@ -52,6 +54,33 @@ namespace TrainYourProgrammer {
       }
 
       return result;
+    }
+
+    public void Calculate() {
+      float result = 0;
+
+      switch (operator1) {
+        case '+':
+          result = number1 + number2;
+          break;
+        case '-':
+          result = number1 - number2;
+          break;
+        case '*':
+          result = number1 * number2;
+          break;
+        case '/':
+          if(number2 == 0) {
+            Console.WriteLine("Division durch 0!!!");
+            return;
+          }
+          result = number1 / number2;
+          break;
+        default:
+          break;
+      }
+
+      Console.WriteLine($"Ergebnis: {result.ToString()}");
     }
   }
 }
