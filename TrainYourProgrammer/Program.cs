@@ -41,8 +41,8 @@ namespace TrainYourProgrammer {
     public void FindBadFridays() {
       int badDayCount = 0;
 
-      for (DateTime current = startDate; current <= endDate; current = current.AddDays(1)) {
-        if (current.DayOfWeek == DayOfWeek.Friday && current.Day == 13) {
+      for(DateTime current = startDate; current <= endDate; current = current.AddDays(1)) {
+        if(current.DayOfWeek == DayOfWeek.Friday && current.Day == 13) {
           Console.WriteLine(current.ToLongDateString());
           badDayCount++;
         }
